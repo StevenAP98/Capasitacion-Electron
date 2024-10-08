@@ -1,0 +1,82 @@
+name: Build and Publish Electron App
+
+on:
+  push:
+    tags:
+      - '*' # Ejecuta el workflow cuando se empuja un nuevo tag
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Utiliza una máquina virtual con Ubuntu como sistema operativo
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Clona el repositorio en la máquina virtual
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Configura Node.js versión 14
+
+      - name: Install dependencies
+        run: npm install # Instala las dependencias del proyecto
+
+      - name: Build Electron app
+        run: npm run build # Construye la aplicación Electron
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: electron-app # Nombre del artefacto
+          path: path/to/build/artifacts # Ruta a los artefactos construidos
+
+      - name: Checkout code
+        uses: actions/checkout@v2 # Clona el repositorio en la máquina virtual
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: electron-app # Nombre del artefacto a descargar
+          path: path/to/download # Ruta donde se descargarán los artefactos
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token de GitHub para autenticar la acción
+        with:
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: electron-app
+          path: path/to/download
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: path/to/download
+          asset_name: electron-app.zip
+          asset_content_type: application/zip
