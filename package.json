@@ -3,19 +3,38 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "dev":"electron .",
+    "dev": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.example.electronupdaterdemo",
+    "productName": "ElectronUpdaterDemo",
+    "publish": {
+      "provider": "github",
+      "owner": "StevenAP98",
+      "repo": "Capasitacion-Electron",
+      "token": "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"
+    },
+    "win": { 
+      "target": ["nsis"]
+    },
+    "mac": {  
+      "target": ["dmg"]
+    },
+    "linux": {  
+      "target": ["AppImage"]
+    }
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "electron": "^32.1.0"
-  },
   "eslintConfig": {
     "extends": "standard"
   },
   "devDependencies": {
+    "electron": "^32.1.2",
+    "electron-builder": "^25.1.7",
+    "electron-updater": "^6.3.9",
     "standard": "^17.1.0"
   }
 }
