@@ -2,18 +2,19 @@
   "name": "capasitacion-electron",
   "version": "1.0.0",
   "main": "main.js",
+
   "scripts": {
     "dev": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"   
   },
   "build": {
     "appId": "com.example.electronupdaterdemo",
     "productName": "ElectronUpdaterDemo",
     "publish": {
       "provider": "github",
-      "owner": "StevenAP98",
-      "repo": "Capasitacion-Electron",
-      "token": "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"
+      "owner": "StevenAP98dkl",
+      "repo": "Capasitacion-Electron"
     },
     "win": { 
       "target": ["nsis"]

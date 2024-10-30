@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../css/js/style.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuración de CSP</title>
+</head>
+<body>
+
+<div class="sidebar">
+    <h1><img src="../images/logo.png" alt="Logo">BAC</h1>
+    <a class="menu-item" href="./configuration-csp.html">CSP</a>
+    <a class="menu-item" href="./configuration-server.html">Servidor</a>
+    <a class="menu-item" href="./configuration-printh.html">Impresión</a>
+</div>
+
+<div class="content">
+    <div class="header" sty>
+        <h2 style="margin: 10px;">Configuración de CSP</h2>
+        <span style="margin: 10px;"><strong>v1.0.0</strong></span>
+    </div>
+    
+    <div class="config-box box-csp" style="height: 420px;">
+        <label for="cliente-interop"><strong>Cliente Interop Service</strong></label>
+        <input type="text" id="cliente-interop">
+        
+        <label for="servicio-autorizacion"><strong>Servicio de Autorización</strong></label>
+        <input type="text" id="servicio-autorizacion">
+        
+        <label for="usuario"><strong>Usuario</strong></label>
+        <input type="text" id="usuario">
+        
+        <label for="contrasena"><strong>Contraseña</strong></label>
+        <input type="password" id="contrasena">
+        <button>Guardar</button>
+    </div>
+</div>
+
+</body>
+</html>
